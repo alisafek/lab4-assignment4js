@@ -43,6 +43,7 @@ let currentItem = 0;
 
 window.addEventListener("DOMContentLoaded", function () {
   showPerson(currentItem);
+  updateButtonStates();
 });
 
 function showPerson(person) {
@@ -53,12 +54,27 @@ function showPerson(person) {
   comment.textContent = item.text;
 }
 
+function updateButtonStates() {
+  if (currentItem === 0) {
+    prevBtn.disabled = true;
+  } else {
+    prevBtn.disabled = false;
+  }
+
+  if (currentItem === reviews.length - 1) {
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.disabled = false;
+  }
+}
+
 nextBtn.addEventListener("click", function () {
   currentItem++;
   if (currentItem > reviews.length - 1) {
     currentItem = 0;
   }
   showPerson(currentItem);
+  updateButtonStates();
 });
 
 prevBtn.addEventListener("click", function () {
@@ -67,9 +83,11 @@ prevBtn.addEventListener("click", function () {
     currentItem = reviews.length - 1;
   }
   showPerson(currentItem);
+  updateButtonStates();
 });
 
 randomBtn.addEventListener("click", function () {
   let randomIndex = Math.floor(Math.random() * reviews.length);
-  showPerson(randomIndex);
+  currentItem = randomIndex;
+  showPerson(currentItem);
 });
