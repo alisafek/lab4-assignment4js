@@ -11,9 +11,9 @@ btn.addEventListener("click", function () {
 
 function getRandomHex() {
   let hexValue = "#";
-  const hexChars = "0123456789ABCDEF";
+  const hexRange = "0123456789ABCDEF";
   for (let i = 0; i < 6; i++) {
-    hexValue += hexChars[Math.floor(Math.random() * 16)];
+    hexValue += hexRange[Math.floor(Math.random() * 16)];
   }
   console.log(hexValue);
   return hexValue;

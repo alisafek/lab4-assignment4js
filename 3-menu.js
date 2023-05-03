@@ -89,7 +89,7 @@ const menuList = [
 return `<button class="filter-btn" type="button" data-id=  >  </button>`
 */
 const sectionCenter = document.querySelector(".menu-wrap-section");
-const filterBtns = document.querySelectorAll(".filter-btn");
+const filterBtns = document.querySelectorAll(".filter-btn"); //will find all tags with this class selectors
 const btnContainer = document.querySelector(".btn-container");
 window.addEventListener("DOMContentLoaded", function () {
   displayMenuItems(menuList);
@@ -117,4 +117,19 @@ function displayMenuItems(menuItems) {
   sectionCenter.innerHTML = displayMenu;
 }
 
-function displayMenuButtons() {}
+function displayMenuButtons() {
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      // console.log(e.currentTarget.dataset.id);
+      const category = e.currentTarget.dataset.id;
+
+      const menuCategory = menuList.filter(function (menuItem) {
+        if (menuItem.category === category) return menuItem;
+        // console.log(menuItem);
+      });
+
+      if (category === "all") displayMenuItems(menuList);
+      else displayMenuItems(menuCategory);
+    });
+  });
+}
